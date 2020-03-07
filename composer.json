@@ -1,0 +1,25 @@
+{
+    "name": "resist/auth3",
+    "license": "GPL-3.0-only",
+    "description": "Wrapper of Delight\\Auth user authentication for Fat Free Framework powered apps.",
+    "homepage": "https://structure.hu",
+    "authors": [
+        {
+            "name": "r3sist",
+            "email": "r3sist@users.noreply.github.com"
+        }
+    ],
+    "type": "library",
+    "require": {
+        "php": ">=7.4",
+        "bcosca/fatfree-core": "3.*",
+        "delight-im/auth": "^8.1",
+        "ikkez/f3-flash": "1.*",
+        "wixel/gump": "dev-master"
+    },
+    "autoload": {
+        "classmap": ["src"]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
