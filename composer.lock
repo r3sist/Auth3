@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf280f553bd56b0c0b06637be6e6b3fc",
+    "content-hash": "3e502c2f959572650b6033e077da394f",
     "packages": [
         {
             "name": "bcosca/fatfree-core",
@@ -272,20 +272,131 @@
             "time": "2017-12-06T17:50:51+00:00"
         },
         {
+            "name": "kint-php/kint",
+            "version": "3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kint-php/kint.git",
+                "reference": "335ac1bcaf04d87df70d8aa51e8887ba2c6d203b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kint-php/kint/zipball/335ac1bcaf04d87df70d8aa51e8887ba2c6d203b",
+                "reference": "335ac1bcaf04d87df70d8aa51e8887ba2c6d203b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.6"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "phpunit/phpunit": "^4.0",
+                "seld/phar-utils": "^1.0",
+                "symfony/finder": "^2.0 || ^3.0 || ^4.0",
+                "vimeo/psalm": "^3.0"
+            },
+            "suggest": {
+                "ext-ctype": "Simple data type tests",
+                "ext-iconv": "Provides fallback detection for ambiguous legacy string encodings such as the Windows and ISO 8859 code pages",
+                "ext-mbstring": "Provides string encoding detection",
+                "kint-php/kint-js": "Provides a simplified dump to console.log()",
+                "kint-php/kint-twig": "Provides d() and s() functions in twig templates",
+                "symfony/polyfill-ctype": "Replacement for ext-ctype if missing",
+                "symfony/polyfill-iconv": "Replacement for ext-iconv if missing",
+                "symfony/polyfill-mbstring": "Replacement for ext-mbstring if missing"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "init.php"
+                ],
+                "psr-4": {
+                    "Kint\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Vollebregt",
+                    "homepage": "https://github.com/jnvsor"
+                },
+                {
+                    "name": "Rokas Šleinius",
+                    "homepage": "https://github.com/raveren"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/kint-php/kint/graphs/contributors"
+                }
+            ],
+            "description": "Kint - debugging tool for PHP developers",
+            "homepage": "https://kint-php.github.io/kint/",
+            "keywords": [
+                "debug",
+                "kint",
+                "php"
+            ],
+            "time": "2019-10-17T18:05:24+00:00"
+        },
+        {
+            "name": "resist/h3",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/r3sist/h3.git",
+                "reference": "ccc7ec1ed6a45ccfb47374f3d1576556bffe5011"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/r3sist/h3/zipball/ccc7ec1ed6a45ccfb47374f3d1576556bffe5011",
+                "reference": "ccc7ec1ed6a45ccfb47374f3d1576556bffe5011",
+                "shasum": ""
+            },
+            "require": {
+                "bcosca/fatfree-core": "3.*",
+                "ext-json": "*",
+                "ext-libxml": "*",
+                "ext-simplexml": "*",
+                "kint-php/kint": "*",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "nette/tester": "2.*",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "description": "Simple helper methods for Fatfree Framework powered apps",
+            "homepage": "https://structure.hu",
+            "time": "2020-03-08T19:33:05+00:00"
+        },
+        {
             "name": "wixel/gump",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Wixel/GUMP.git",
-                "reference": "b50349001e032b173cb7ecee5c548d19bbe329f3"
+                "reference": "b37ae53bdfdf0c3d9c0e5b95dd06f53244c7c7a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Wixel/GUMP/zipball/b50349001e032b173cb7ecee5c548d19bbe329f3",
-                "reference": "b50349001e032b173cb7ecee5c548d19bbe329f3",
+                "url": "https://api.github.com/repos/Wixel/GUMP/zipball/b37ae53bdfdf0c3d9c0e5b95dd06f53244c7c7a8",
+                "reference": "b37ae53bdfdf0c3d9c0e5b95dd06f53244c7c7a8",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "ext-mbstring": "*",
                 "php": ">=7.0"
             },
@@ -326,14 +437,15 @@
                 "validation",
                 "validator"
             ],
-            "time": "2020-03-04T16:38:52+00:00"
+            "time": "2020-03-08T18:59:15+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "wixel/gump": 20
+        "wixel/gump": 20,
+        "resist/h3": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

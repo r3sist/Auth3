@@ -5,18 +5,21 @@ namespace resist\Auth3;
 use Base;
 use Flash;
 use GUMP;
+use \resist\H3\Logger;
 
 class Auth3Controller
 {
     private Auth3 $auth3;
     private Flash $flash;
     private GUMP $gump;
+    private Logger $logger;
 
-    public function __construct(Auth3 $auth3, Flash $flash, GUMP $gump)
+    public function __construct(Auth3 $auth3, Flash $flash, GUMP $gump, Logger $logger)
     {
         $this->auth3 = $auth3;
         $this->flash = $flash;
         $this->gump = $gump;
+        $this->logger = $logger;
     }
 
     public function signupController(Base $f3): void
@@ -40,6 +43,7 @@ class Auth3Controller
 
         if ($validPost === false) {
             $this->flash->addMessage($this->gump->get_readable_errors(true), 'danger');
+            $this->logger->create('warning', 'auth3 signup - controller validation', $this->gump->get_errors_array());
             $f3->reroute('@signup');
         }
 
@@ -63,6 +67,7 @@ class Auth3Controller
 
         if ($validPost === false) {
             $this->flash->addMessage($this->gump->get_readable_errors(true), 'danger');
+            $this->logger->create('warning', 'auth3 login - controller validation', $this->gump->get_errors_array());
             $f3->reroute('@login');
         }
 

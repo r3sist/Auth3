@@ -17,6 +17,7 @@ use Flash;
 use GUMP;
 use Delight\Auth\Auth;
 use Delight\Auth\InvalidEmailException;
+use resist\H3\Logger;
 
 class Auth3
 {
@@ -26,18 +27,20 @@ class Auth3
     private SQL $db;
     private Flash $flash;
     private GUMP $gump;
+    private Logger $logger;
     private Auth $auth;
 
     private const AUTH3L10N_SIGNUPSUCCESS = 'Sikeres regisztráció. Email megerősítés szükséges!';
     private const AUTH3L10N_LOGINSUCCESS = 'Sikeres bejelentkezés.';
     private const AUTH3L10N_LOGOUTSUCCESS = 'Sikeres kijelentkezés.';
 
-    public function __construct(Base $f3, SQL $db, Flash $flash, GUMP $gump)
+    public function __construct(Base $f3, SQL $db, Flash $flash, GUMP $gump, Logger $logger)
     {
         $this->f3 = $f3;
         $this->db = $db;
         $this->flash = $flash;
         $this->gump = $gump;
+        $this->logger = $logger;
         $this->auth = new Auth($db->pdo(), null, self::TABLEPREFIX, AUTH3_THROTTLING);
 
         $uid = $this->auth->getUserId();
@@ -90,6 +93,7 @@ class Auth3
             'Content-type: text/html;charset=UTF-8'."\r\n" .
             'X-Mailer: PHP/'.phpversion();
         mail($emailTo, $emailSubject, $emailMessage, $emailHeaders);
+        $this->logger->create('info', 'auth3 signup - email sent', [$emailSubject, $emailTo]);
     }
 
     /** Email verification is disabled by removed 4th callback parameter */
@@ -103,18 +107,24 @@ class Auth3
             $this->auth->admin()->addRoleForUserById($userId, Role::SUBSCRIBER);
 
             $this->flash->addMessage(self::AUTH3L10N_SIGNUPSUCCESS, 'success');
+            $this->logger->create('success', 'auth3 signup', [$email, $username]);
             $this->f3->reroute('@login');
+
         } catch (InvalidEmailException $e) {
             $this->flash->addMessage('Invalid email address', 'danger');
+            $this->logger->create('warning', 'auth3 signup - invalid email', [$email]);
             $this->f3->reroute('@signup');
         } catch (InvalidPasswordException $e) {
             $this->flash->addMessage('Invalid password', 'danger');
+            $this->logger->create('warning', 'auth3 signup - invalid password', [$password]);
             $this->f3->reroute('@signup');
         } catch (UserAlreadyExistsException $e) {
             $this->flash->addMessage('Már van ilyen (email vagy név) felhasználó a rendszerben.', 'danger');
+            $this->logger->create('warning', 'auth3 signup - duplicated user', [$email, $username]);
             $this->f3->reroute('@signup');
         } catch (TooManyRequestsException $e) {
             $this->flash->addMessage('Too many requests', 'danger');
+            $this->logger->create('warning', 'auth3 signup - too many request', [$email, $username]);
             $this->f3->reroute('@signup');
         }
     }
@@ -123,23 +133,27 @@ class Auth3
     {
         try {
             $this->auth->loginWithUsername($username, $password, $duration);
-
             $this->flash->addMessage(self::AUTH3L10N_LOGINSUCCESS, 'success');
             $this->f3->reroute('/');
         } catch (InvalidPasswordException $e) {
             $this->flash->addMessage('Wrong password', 'danger');
+            $this->logger->create('warning', 'auth3 login - invalid email', [$username]);
             $this->f3->reroute('@login');
         } catch (EmailNotVerifiedException $e) {
             $this->flash->addMessage('Email not verified', 'danger');
+            $this->logger->create('warning', 'auth3 login - unverified email', [$username]);
             $this->f3->reroute('@login');
         } catch (TooManyRequestsException $e) {
             $this->flash->addMessage('Too many requests', 'danger');
+            $this->logger->create('warning', 'auth3 login - too many requests', [$username]);
             $this->f3->reroute('@login');
         } catch (UnknownUsernameException $e) {
             $this->flash->addMessage('Invalid username', 'danger');
+            $this->logger->create('warning', 'auth3 login - unknown username', [$username]);
             $this->f3->reroute('@login');
         } catch (AmbiguousUsernameException $e) {
             $this->flash->addMessage('Invalid username', 'danger');
+            $this->logger->create('warning', 'auth3 login - invalid username', [$username]);
             $this->f3->reroute('@login');
         }
     }
@@ -158,22 +172,27 @@ class Auth3
             $email = $this->auth->confirmEmailAndSignIn($selector, $token);
 
             $this->flash->addMessage($email[1].' cím megerősítveés automatikusan beléptetve.', 'success');
+            $this->logger->create('success', 'auth3 verify', [$email[1]]);
             $this->f3->reroute('@login');
         }
         catch (InvalidSelectorTokenPairException $e) {
             $this->flash->addMessage('Invalid token.', 'danger');
+            $this->logger->create('warning', 'auth3 verify - invalid token');
             $this->f3->reroute('@login');
         }
         catch (TokenExpiredException $e) {
             $this->flash->addMessage('Token expired.', 'danger');
+            $this->logger->create('warning', 'auth3 verify - token expired',);
             $this->f3->reroute('@login');
         }
         catch (UserAlreadyExistsException $e) {
             $this->flash->addMessage('Email address already exists.', 'danger');
+            $this->logger->create('warning', 'auth3 verify - already verified',);
             $this->f3->reroute('@login');
         }
         catch (TooManyRequestsException $e) {
             $this->flash->addMessage('Too many requests.', 'dager');
+            $this->logger->create('warning', 'auth3 verify - too many requests',);
             $this->f3->reroute('@login');
         }
     }
