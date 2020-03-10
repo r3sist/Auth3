@@ -43,7 +43,7 @@ class Auth3Controller
 
         if ($validPost === false) {
             $this->flash->addMessage($this->gump->get_readable_errors(true), 'danger');
-            $this->logger->create('warning', 'auth3 signup - controller validation', $this->gump->get_errors_array());
+            $this->logger->create('warning', 'auth3 signup - controller validation', [$this->gump->get_errors_array(), $_POST]);
             $f3->reroute('@signup');
         }
 
@@ -67,7 +67,7 @@ class Auth3Controller
 
         if ($validPost === false) {
             $this->flash->addMessage($this->gump->get_readable_errors(true), 'danger');
-            $this->logger->create('warning', 'auth3 login - controller validation', $this->gump->get_errors_array());
+            $this->logger->create('warning', 'auth3 login - controller validation', [$this->gump->get_errors_array(), $_POST]);
             $f3->reroute('@login');
         }
 
