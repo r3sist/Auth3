@@ -8,11 +8,15 @@ This repository is for personal use only. May contain hard coded Hungarian strin
 
 ## Installation / Usage
 
-This package is a dirty wrapper of [Delight\Auth user authentication library](https://github.com/delight-im/PHP-Auth).
+*Auth3* requires dependency injector *(DI)* container, which is not the default behaviour of Fatfree Framework powered apps.
 
-For database initialization run: https://github.com/delight-im/PHP-Auth/blob/master/Database/MySQL.sql  
+### Database
 
 *Auth3* uses `auth3_` prefix!
+
+For database initialization run modified version of: https://github.com/delight-im/PHP-Auth/blob/master/Database/MySQL.sql  
+
+Make sure your DI substitutes `\DB\SQL` to the F3's DB object: `\DB\SQL('mysql:host=localhost;port=3306;dbname='.DBNAME, DBUSER, DBPASS)`
 
 ### Required constants
 
@@ -24,10 +28,18 @@ define('AUTH3_USERDATATABLE', 'users');
 define('AUTH3_THROTTLING', false);
 
 // Invite code for registration. If empty string, captcha used. (string)
-define('AUTH3_INVITECODE', 'voyager3');
+define('AUTH3_INVITECODE', '');
 
 // Email verification email send from. (string)
-define('AUTH3_EMAILFROM', 'vankos@resist.hu');
+define('AUTH3_EMAILFROM', '');
+```
+
+### Initialize *Auth3*
+
+Via DI:
+
+```php
+$f3->get('CONTAINER')('\resist\Auth3\Auth3');
 ```
 
 ### Required F3 named routes
@@ -61,3 +73,21 @@ On success: rerouted to `@login` with *flash message*
 + `(array) udata` associative array of user data from custom data table
 + `(Delight\Auth\Auth) auth`
 + `(bool) mobile`
+
+### Available static helpers
+
+#### access()
+
+Quick access role check and redirect on error with flash message.
+
+`\resist\Auth3\Auth3Helper::access($roles, $redirect = 403, string $message = 'Error');`
+
++ If `(bool)$role === true`: forced to be logged in user
++ If `(bool)$role === false`: forced to be not logged in guest user (`$f3->uid = 0`)
++ If `(string)$role === 'ADMIN'` or [any of these role names](https://github.com/delight-im/PHP-Auth/blob/master/src/Role.php): forced to have role name
++ If `(array)$role === ['ADMIN', 'MODERATOR']'` or [any of these role names](https://github.com/delight-im/PHP-Auth/blob/master/src/Role.php): forced to have one of the role names
++ If `(int)$redirect === 403` is integer, error page with code used; if string used `(string)$redirect === '@homepage'` or `(string)$redirect === '/home/page'` F3 routing used
+
+#### isAdmin()
+
+`\resist\Auth3\Auth3Helper::isAdmin()` returns true if user has `ADMIN` role name
