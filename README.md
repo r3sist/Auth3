@@ -18,6 +18,8 @@ For database initialization run modified version of: https://github.com/delight-
 
 Make sure your DI substitutes `\DB\SQL` to the F3's DB object: `\DB\SQL('mysql:host=localhost;port=3306;dbname='.DBNAME, DBUSER, DBPASS)`
 
+Also needs `log` table: see *resist\H3*
+
 ### Required constants
 
 ```php
@@ -91,3 +93,7 @@ Quick access role check and redirect on error with flash message.
 #### isAdmin()
 
 `\resist\Auth3\Auth3Helper::isAdmin()` returns true if user has `ADMIN` role name
+
+## Notes
+
+For PhpStorm `/** @used */` annotation is used for suppress unused code and entry points.
