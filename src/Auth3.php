@@ -99,7 +99,7 @@ class Auth3
     public function signup(string $email, string $password, string $username): void
     {
         try {
-            $userId = $this->auth->register($email, $password, $username, function ($selector, $token) use ($email) {
+            $userId = $this->auth->registerWithUniqueUsername($email, $password, $username, function ($selector, $token) use ($email) {
                 $this->sendVerificationEmail($selector, $token, $email);
             });
 
@@ -134,7 +134,7 @@ class Auth3
     public function signupWithoutEmail(string $password, string $username): void
     {
         try {
-            $userId = $this->auth->register('', $password, $username);
+            $userId = $this->auth->registerWithUniqueUsername(\H3::gen(20).'@localhost', $password, $username);
 
             $this->auth->admin()->addRoleForUserById($userId, Role::SUBSCRIBER);
 
