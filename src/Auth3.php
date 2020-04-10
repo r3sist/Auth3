@@ -135,12 +135,6 @@ class Auth3
     public function loginWithUsername(string $username, string $password, ?int $duration): void
     {
         try {
-            $this->auth->destroySession();
-        } catch (\Throwable $e) {
-
-        }
-
-        try {
             $this->auth->loginWithUsername($username, $password, $duration);
             $this->flash->addMessage(self::AUTH3L10N_LOGINSUCCESS, 'success');
             $this->f3->reroute('/');
