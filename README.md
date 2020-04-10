@@ -29,8 +29,11 @@ define('AUTH3_USERDATATABLE', 'users');
 // Throttling. (bool)
 define('AUTH3_THROTTLING', false);
 
-// Invite code for registration. If empty string, captcha used. (string)
+// Invite code for registration.
 define('AUTH3_INVITECODE', '');
+
+// Use captcha code instead of invite code. If enabled and invite code is not empty, generated captcha is extended by invite code
+define('AUTH3_CAPTCHA', true);
 
 // Store email in DB and send verification email during registration
 define('AUTH3_EMAIL_REQUIRED', true);
@@ -97,6 +100,26 @@ Quick access role check and redirect on error with flash message.
 #### isAdmin()
 
 `\resist\Auth3\Auth3Helper::isAdmin()` returns true if user has `ADMIN` role name
+
+## Captcha
+
+If 
+
+Required route:
+
+`$f3->route('GET @captcha: /captcha', '\resist\Auth3\CaptchaController->renderCaptcha');`
+
+Show image:
+
+```html
+<img class="c-captcha" src="/captcha" alt="captcha">
+```
+
+Regenerate captcha image with *jQuery*:
+
+```html
+<a onclick="$('.c-captcha').attr('src', '/captcha' + '?' + Math.random());">New</a>
+```
 
 ## Notes
 
