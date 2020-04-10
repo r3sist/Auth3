@@ -27,6 +27,10 @@ class Auth3Controller
     {
         $_POST['codeconfirm'] = AUTH3_INVITECODE;
 
+        if (isset($_SESSION['captcha']) && AUTH3_CAPTCHA === true) {
+            $_POST['codeconfirm'] = (string)$_SESSION['captcha'].AUTH3_INVITECODE;
+        }
+
         $emailRule = 'required|valid_email';
         if (AUTH3_EMAIL_REQUIRED === false) {
             $emailRule = 'valid_email';
