@@ -33,6 +33,6 @@ class CaptchaController
 
     private function spreadFont(): void
     {
-        $this->f3->push('UI', 'vendor/resist/Auth3/font');
+        $this->f3->push('UI', 'vendor/resist/Auth3/font/');
     }
 }
