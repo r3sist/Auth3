@@ -112,11 +112,39 @@ class Auth3
             $this->flash->addMessage(self::AUTH3L10N_SIGNUPSUCCESS, 'success');
             $this->logger->create('success', 'auth3 signup', [$email, $username]);
             $this->f3->reroute('@login');
-
         } catch (InvalidEmailException $e) {
             $this->flash->addMessage('Invalid email address', 'danger');
             $this->logger->create('warning', 'auth3 signup - invalid email', [$email]);
             $this->f3->reroute('@signup');
+        } catch (InvalidPasswordException $e) {
+            $this->flash->addMessage('Invalid password', 'danger');
+            $this->logger->create('warning', 'auth3 signup - invalid password', [$password]);
+            $this->f3->reroute('@signup');
+        } catch (UserAlreadyExistsException $e) {
+            $this->flash->addMessage('Már van ilyen (email vagy név) felhasználó a rendszerben.', 'danger');
+            $this->logger->create('warning', 'auth3 signup - duplicated user', [$email, $username]);
+            $this->f3->reroute('@signup');
+        } catch (TooManyRequestsException $e) {
+            $this->flash->addMessage('Too many requests', 'danger');
+            $this->logger->create('warning', 'auth3 signup - too many request', [$email, $username]);
+            $this->f3->reroute('@signup');
+        }
+    }
+
+    public function signupWithoutEmail(string $password, string $username): void
+    {
+        try {
+            $userId = $this->auth->register('', $password, $username);
+
+            $this->auth->admin()->addRoleForUserById($userId, Role::SUBSCRIBER);
+
+            // Create empty row in user-data table
+            $query = 'INSERT INTO '.AUTH3_USERDATATABLE.' (`uid`) VALUES (:uid)';
+            $this->db->exec($query, [':uid' => $userId]);
+
+            $this->flash->addMessage(self::AUTH3L10N_SIGNUPSUCCESS, 'success');
+            $this->logger->create('success', 'auth3 signup', [$username]);
+            $this->f3->reroute('@login');
         } catch (InvalidPasswordException $e) {
             $this->flash->addMessage('Invalid password', 'danger');
             $this->logger->create('warning', 'auth3 signup - invalid password', [$password]);

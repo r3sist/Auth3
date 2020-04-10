@@ -27,12 +27,17 @@ class Auth3Controller
     {
         $_POST['codeconfirm'] = AUTH3_INVITECODE;
 
+        $emailRule = 'required|valid_email';
+        if (AUTH3_EMAIL_REQUIRED === false) {
+            $emailRule = 'valid_email';
+        }
+
         $this->gump->validation_rules([
             'username' => 'required',
             'password' => 'required|min_len,1',
             'passwordconfirm' => 'required|min_len,1|equalsfield,password',
             'code' => 'required|equalsfield,codeconfirm',
-            'email' => 'required|valid_email'
+            'email' => $emailRule,
         ]);
 
         $this->gump->filter_rules([
@@ -50,7 +55,11 @@ class Auth3Controller
 
         $f3->scrub($_POST['username']);
 
-        $this->auth3->signup($_POST['email'], $_POST['password'], $_POST['username']);
+        if (AUTH3_EMAIL_REQUIRED === false) {
+            $this->auth3->signupWithoutEmail($_POST['password'], $_POST['username']);
+        } else {
+            $this->auth3->signup($_POST['email'], $_POST['password'], $_POST['username']);
+        }
     }
 
     /** @used */

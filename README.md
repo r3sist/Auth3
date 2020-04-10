@@ -32,6 +32,9 @@ define('AUTH3_THROTTLING', false);
 // Invite code for registration. If empty string, captcha used. (string)
 define('AUTH3_INVITECODE', '');
 
+// Store email in DB and send verification email during registration
+define('AUTH3_EMAIL_REQUIRED', true);
+
 // Email verification email send from. (string)
 define('AUTH3_EMAILFROM', '');
 ```
@@ -63,6 +66,7 @@ Required parameters:
 + `POST.password`: *required|min_len,1*
 + `POST.passwordconfirm`: *required|min_len,1|equalsfield,password*
 + `POST.email`: *required|valid_email*; trimmed; sanitized
++ `POST.code`: cleaned silently
 
 On error: rerouted to `@signup` with *flash message* contains GUMP readable errors
 

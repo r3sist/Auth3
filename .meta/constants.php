@@ -10,3 +10,6 @@ define('AUTH3_INVITECODE', '');
 
 // Email verification email send from. (string)
 define('AUTH3_EMAILFROM', '');
+
+// Store email in DB and send verification email during registration
+define('AUTH3_EMAIL_REQUIRED', true);
