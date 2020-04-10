@@ -11,6 +11,7 @@ use Delight\Auth\InvalidSelectorTokenPairException;
 use Delight\Auth\Role;
 use Delight\Auth\TokenExpiredException;
 use Delight\Auth\TooManyRequestsException;
+use Delight\Auth\UnknownIdException;
 use Delight\Auth\UnknownUsernameException;
 use Delight\Auth\UserAlreadyExistsException;
 use Flash;
@@ -146,18 +147,24 @@ class Auth3
             $this->logger->create('success', 'auth3 signup', [$username]);
             $this->f3->reroute('@login');
         } catch (InvalidEmailException $e) {
-            // continue
+            $this->flash->addMessage('Invalid email address', 'danger');
+            $this->logger->create('warning', 'auth3 signup - invalid email', [$userId, $username]);
+            $this->f3->reroute('@signup');
         } catch (InvalidPasswordException $e) {
             $this->flash->addMessage('Invalid password', 'danger');
             $this->logger->create('warning', 'auth3 signup - invalid password', [$password]);
             $this->f3->reroute('@signup');
         } catch (UserAlreadyExistsException $e) {
             $this->flash->addMessage('Már van ilyen (email vagy név) felhasználó a rendszerben.', 'danger');
-            $this->logger->create('warning', 'auth3 signup - duplicated user', [$email, $username]);
+            $this->logger->create('warning', 'auth3 signup - duplicated user', [$username]);
             $this->f3->reroute('@signup');
         } catch (TooManyRequestsException $e) {
             $this->flash->addMessage('Too many requests', 'danger');
-            $this->logger->create('warning', 'auth3 signup - too many request', [$email, $username]);
+            $this->logger->create('warning', 'auth3 signup - too many request', [$username]);
+            $this->f3->reroute('@signup');
+        } catch (UnknownIdException $e) {
+            $this->flash->addMessage('Unknown Id', 'danger');
+            $this->logger->create('warning', 'auth3 signup - Unknown Id', [$userId]);
             $this->f3->reroute('@signup');
         }
     }
