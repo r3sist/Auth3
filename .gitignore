@@ -5,3 +5,4 @@ vendor/
 _env.php
 _ignore.php
 composer.phar
+composer.lock
