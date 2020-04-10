@@ -145,6 +145,8 @@ class Auth3
             $this->flash->addMessage(self::AUTH3L10N_SIGNUPSUCCESS, 'success');
             $this->logger->create('success', 'auth3 signup', [$username]);
             $this->f3->reroute('@login');
+        } catch (InvalidEmailException $e) {
+            // continue
         } catch (InvalidPasswordException $e) {
             $this->flash->addMessage('Invalid password', 'danger');
             $this->logger->create('warning', 'auth3 signup - invalid password', [$password]);
