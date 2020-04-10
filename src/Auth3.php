@@ -96,7 +96,6 @@ class Auth3
         $this->logger->create('info', 'auth3 signup - email sent', [$emailSubject, $emailTo]);
     }
 
-    /** Email verification is disabled by removed 4th callback parameter */
     public function signup(string $email, string $password, string $username): void
     {
         try {
