@@ -5,7 +5,7 @@ namespace resist\Auth3;
 use Base;
 use DB\SQL;
 use DB\SQL\Mapper;
-use Exception;
+use resist\Auth3\Exception\InvalidUserException;
 
 class UserMap extends Mapper
 {
@@ -15,7 +15,7 @@ class UserMap extends Mapper
 
         $this->load(['uid = :uid', ':uid' => $f3->get('uid')]);
         if ($this->dry()) {
-            throw new Exception('Invalid user ID for user.');
+            throw new InvalidUserException('Invalid user ID for user.');
         }
     }
 }
