@@ -2,17 +2,21 @@
 
 namespace resist\Auth3;
 
+use Base;
 use Delight\Auth\Auth;
+use Delight\Auth\Role;
+use Flash;
 
 class Auth3Helper
 {
     /**
      * @param bool|string|array $roles
      * @param int|string $redirect
+     * @used
      */
     public static function access($roles, $redirect = 403, string $message = 'Nincs felhasználói jogosultságod az oldal megtekintéséhez.'): void
     {
-        $f3 = \Base::instance();
+        $f3 = Base::instance();
 
         /** @var Auth $auth */
         $auth = $f3->get('auth');
@@ -32,15 +36,19 @@ class Auth3Helper
             if (is_numeric($redirect)) {
                 $f3->error($redirect);
             } else {
-                \Flash::instance()->addMessage($message, 'danger');
+                Flash::instance()->addMessage($message, 'danger');
                 $f3->reroute($redirect);
             }
         }
     }
 
+    /** @used */
     public static function isAdmin(): bool
     {
-        return \Base::instance()->get('auth')->hasRole(\Delight\Auth\Role::ADMIN);
+        /** @var Auth $auth */
+        $auth = Base::instance()->get('auth');
+
+        return $auth->hasRole(Role::ADMIN);
     }
 
     // TODO touch
