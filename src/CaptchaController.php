@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace resist\U3;
+namespace resist\Auth3;
 
 use \Base;
 use \Image;
