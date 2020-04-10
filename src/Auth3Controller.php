@@ -22,6 +22,7 @@ class Auth3Controller
         $this->logger = $logger;
     }
 
+    /** @used */
     public function signupController(Base $f3): void
     {
         $_POST['codeconfirm'] = AUTH3_INVITECODE;
@@ -52,6 +53,7 @@ class Auth3Controller
         $this->auth3->signup($_POST['email'], $_POST['password'], $_POST['username']);
     }
 
+    /** @used */
     public function loginController(Base $f3): void
     {
         $this->gump->validation_rules([
@@ -78,11 +80,13 @@ class Auth3Controller
         $this->auth3->loginWithUsername($_POST['username'], $_POST['password'], $duration);
     }
 
+    /** @used */
     public function logoutController(Base $f3): void
     {
         $this->auth3->logout();
     }
 
+    /** @used */
     public function verificationController(Base $f3): void
     {
         $this->auth3->verify($f3->get('PARAMS.selector'), $f3->get('PARAMS.token'));
