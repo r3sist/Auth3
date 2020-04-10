@@ -34,11 +34,11 @@ class Auth3
     private const AUTH3L10N_LOGINSUCCESS = 'Sikeres bejelentkezés.';
     private const AUTH3L10N_LOGOUTSUCCESS = 'Sikeres kijelentkezés.';
 
-    public function __construct(Base $f3, SQL $db, Flash $flash, GUMP $gump, Logger $logger)
+    public function __construct(Base $f3, SQL $db, GUMP $gump, Logger $logger)
     {
         $this->f3 = $f3;
         $this->db = $db;
-        $this->flash = $flash;
+        $this->flash = Flash::instance();
         $this->gump = $gump;
         $this->logger = $logger;
         $this->auth = new Auth($db->pdo(), null, self::TABLEPREFIX, AUTH3_THROTTLING);
