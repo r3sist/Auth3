@@ -134,8 +134,12 @@ class Auth3
 
     public function loginWithUsername(string $username, string $password, ?int $duration): void
     {
-        $this->auth->destroySession();
-        
+        try {
+            $this->auth->destroySession();
+        } catch (\Throwable $e) {
+
+        }
+
         try {
             $this->auth->loginWithUsername($username, $password, $duration);
             $this->flash->addMessage(self::AUTH3L10N_LOGINSUCCESS, 'success');
@@ -165,8 +169,13 @@ class Auth3
 
     public function logout(): void
     {
-        $this->auth->logOutEverywhere();
-        $this->auth->destroySession();
+        try {
+            $this->auth->logOutEverywhere();
+            $this->auth->destroySession();
+        } catch (\Throwable $e) {
+
+        }
+
         $this->flash->addMessage(self::AUTH3L10N_LOGOUTSUCCESS, 'success');
         $this->f3->reroute('/');
     }
