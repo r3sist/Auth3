@@ -347,12 +347,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/r3sist/h3.git",
-                "reference": "ccc7ec1ed6a45ccfb47374f3d1576556bffe5011"
+                "reference": "103cd4972fa8a5f3151c6b31bcea0ed0d0d3d1eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/r3sist/h3/zipball/ccc7ec1ed6a45ccfb47374f3d1576556bffe5011",
-                "reference": "ccc7ec1ed6a45ccfb47374f3d1576556bffe5011",
+                "url": "https://api.github.com/repos/r3sist/h3/zipball/103cd4972fa8a5f3151c6b31bcea0ed0d0d3d1eb",
+                "reference": "103cd4972fa8a5f3151c6b31bcea0ed0d0d3d1eb",
                 "shasum": ""
             },
             "require": {
@@ -379,7 +379,7 @@
             ],
             "description": "Simple helper methods for Fatfree Framework powered apps",
             "homepage": "https://structure.hu",
-            "time": "2020-03-08T19:33:05+00:00"
+            "time": "2020-04-05T15:55:54+00:00"
         },
         {
             "name": "wixel/gump",
@@ -387,12 +387,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Wixel/GUMP.git",
-                "reference": "b37ae53bdfdf0c3d9c0e5b95dd06f53244c7c7a8"
+                "reference": "73a432fde80a4d205fa2f5ea00eb71500a265ed4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Wixel/GUMP/zipball/b37ae53bdfdf0c3d9c0e5b95dd06f53244c7c7a8",
-                "reference": "b37ae53bdfdf0c3d9c0e5b95dd06f53244c7c7a8",
+                "url": "https://api.github.com/repos/Wixel/GUMP/zipball/73a432fde80a4d205fa2f5ea00eb71500a265ed4",
+                "reference": "73a432fde80a4d205fa2f5ea00eb71500a265ed4",
                 "shasum": ""
             },
             "require": {
@@ -437,7 +437,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2020-03-08T18:59:15+00:00"
+            "time": "2020-03-18T09:44:43+00:00"
         }
     ],
     "packages-dev": [],
