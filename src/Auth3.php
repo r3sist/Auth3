@@ -134,6 +134,8 @@ class Auth3
 
     public function loginWithUsername(string $username, string $password, ?int $duration): void
     {
+        $this->auth->destroySession();
+        
         try {
             $this->auth->loginWithUsername($username, $password, $duration);
             $this->flash->addMessage(self::AUTH3L10N_LOGINSUCCESS, 'success');
