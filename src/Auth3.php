@@ -105,6 +105,10 @@ class Auth3
 
             $this->auth->admin()->addRoleForUserById($userId, Role::SUBSCRIBER);
 
+            // Create empty row in user-data table
+            $query = 'INSERT INTO '.AUTH3_USERDATATABLE.' (`uid`) VALUES (:uid)';
+            $this->db->exec($query, [':uid' => $userId]);
+
             $this->flash->addMessage(self::AUTH3L10N_SIGNUPSUCCESS, 'success');
             $this->logger->create('success', 'auth3 signup', [$email, $username]);
             $this->f3->reroute('@login');
