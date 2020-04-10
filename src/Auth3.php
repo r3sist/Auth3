@@ -5,6 +5,8 @@ namespace resist\Auth3;
 use Base;
 use DB\SQL;
 use Delight\Auth\AmbiguousUsernameException;
+use Delight\Auth\AuthError;
+use Delight\Auth\DuplicateUsernameException;
 use Delight\Auth\EmailNotVerifiedException;
 use Delight\Auth\InvalidPasswordException;
 use Delight\Auth\InvalidSelectorTokenPairException;
@@ -18,6 +20,7 @@ use Flash;
 use GUMP;
 use Delight\Auth\Auth;
 use Delight\Auth\InvalidEmailException;
+use H3;
 use resist\H3\Logger;
 
 class Auth3
@@ -129,13 +132,21 @@ class Auth3
             $this->flash->addMessage('Too many requests', 'danger');
             $this->logger->create('warning', 'auth3 signup - too many request', [$email, $username]);
             $this->f3->reroute('@signup');
+        } catch (AuthError $e) {
+            $this->flash->addMessage('Auth Error', 'danger');
+            $this->logger->create('warning', 'auth3 signup - Auth Error', [$userId]);
+            $this->f3->reroute('@signup');
+        } catch (DuplicateUsernameException $e) {
+            $this->flash->addMessage('Duplicated Username', 'danger');
+            $this->logger->create('warning', 'auth3 signup - Duplicated username', [$userId]);
+            $this->f3->reroute('@signup');
         }
     }
 
     public function signupWithoutEmail(string $password, string $username): void
     {
         try {
-            $userId = $this->auth->registerWithUniqueUsername(\H3::gen(20).'@localhost', $password, $username);
+            $userId = $this->auth->registerWithUniqueUsername(H3::gen(40).'@sorfi.org', $password, $username);
 
             $this->auth->admin()->addRoleForUserById($userId, Role::SUBSCRIBER);
 
@@ -165,6 +176,14 @@ class Auth3
         } catch (UnknownIdException $e) {
             $this->flash->addMessage('Unknown Id', 'danger');
             $this->logger->create('warning', 'auth3 signup - Unknown Id', [$userId]);
+            $this->f3->reroute('@signup');
+        } catch (AuthError $e) {
+            $this->flash->addMessage('Auth Error', 'danger');
+            $this->logger->create('warning', 'auth3 signup - Auth Error', [$userId]);
+            $this->f3->reroute('@signup');
+        } catch (DuplicateUsernameException $e) {
+            $this->flash->addMessage('Duplicated Username', 'danger');
+            $this->logger->create('warning', 'auth3 signup - Duplicated username', [$userId]);
             $this->f3->reroute('@signup');
         }
     }
