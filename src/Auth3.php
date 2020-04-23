@@ -78,7 +78,7 @@ class Auth3
     private function getUserCustomData(int $uid): array
     {
         if (AUTH3_USERDATATABLE !== '') {
-            $query = 'SELECT * FROM '.AUTH3_USERDATATABLE.' WHERE `uid` = :uid LIMIT 1';
+            $query = 'SELECT * FROM '.AUTH3_USERDATATABLE.' WHERE `uid` = :uid LIMIT 1 -- Auth3 getUserCustomData';
             $userData = $this->db->exec($query, [':uid' => $uid]);
             if (!empty($userData)) {
                 return $userData[0];
@@ -151,7 +151,7 @@ class Auth3
             $this->auth->admin()->addRoleForUserById($userId, Role::SUBSCRIBER);
 
             // Create empty row in user-data table
-            $query = 'INSERT INTO '.AUTH3_USERDATATABLE.' (`uid`) VALUES (:uid)';
+            $query = 'INSERT INTO '.AUTH3_USERDATATABLE.' (`uid`) VALUES (:uid) -- Auth3 signupWithoutEmail';
             $this->db->exec($query, [':uid' => $userId]);
 
             $this->flash->addMessage(self::AUTH3L10N_SIGNUPSUCCESS, 'success');
