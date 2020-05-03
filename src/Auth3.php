@@ -35,6 +35,7 @@ class Auth3
     private Auth $auth;
 
     private const AUTH3L10N_SIGNUPSUCCESS = 'Sikeres regisztráció. Email megerősítés szükséges!';
+    private const AUTH3L10N_SIGNUPSUCCESSALT = 'Sikeres regisztráció.';
     private const AUTH3L10N_LOGINSUCCESS = 'Sikeres bejelentkezés.';
     private const AUTH3L10N_LOGOUTSUCCESS = 'Sikeres kijelentkezés.';
 
@@ -154,7 +155,7 @@ class Auth3
             $query = 'INSERT INTO '.AUTH3_USERDATATABLE.' (`uid`) VALUES (:uid) -- Auth3 signupWithoutEmail';
             $this->db->exec($query, [':uid' => $userId]);
 
-            $this->flash->addMessage(self::AUTH3L10N_SIGNUPSUCCESS, 'success');
+            $this->flash->addMessage(self::AUTH3L10N_SIGNUPSUCCESSALT, 'success');
             $this->logger->create('success', 'auth3 signup', [$username]);
             $this->f3->reroute('@login');
         } catch (InvalidEmailException $e) {
