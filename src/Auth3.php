@@ -193,7 +193,7 @@ class Auth3
     {
         try {
             $this->auth->loginWithUsername($username, $password, $duration);
-            $this->flash->addMessage(self::AUTH3L10N_LOGINSUCCESS, 'success');
+//            $this->flash->addMessage(self::AUTH3L10N_LOGINSUCCESS, 'success');
             $this->f3->reroute('/');
         } catch (InvalidPasswordException $e) {
             $this->flash->addMessage('Wrong password', 'danger');
