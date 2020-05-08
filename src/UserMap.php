@@ -2,20 +2,22 @@
 
 namespace resist\Auth3;
 
-use Base;
 use DB\SQL;
 use DB\SQL\Mapper;
 use resist\Auth3\Exception\InvalidUserException;
 
 class UserMap extends Mapper
 {
-    public function __construct(Base $f3, SQL $db)
+    public function __construct(SQL $db)
     {
         parent::__construct($db, AUTH3_USERDATATABLE);
+    }
 
-        $this->load(['uid = :uid', ':uid' => $f3->get('uid')]);
+    public function loadByUid(int $uid) :void
+    {
+        $this->load(['uid = :uid', ':uid' => $uid]);
         if ($this->dry()) {
-            throw new InvalidUserException('Invalid user ID for user.');
+            throw new InvalidUserException('Invalid user ID. (Error Auth3-00)');
         }
     }
 }
