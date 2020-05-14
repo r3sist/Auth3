@@ -39,16 +39,16 @@
         },
         {
             "name": "delight-im/auth",
-            "version": "v8.1.0",
+            "version": "v8.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/delight-im/PHP-Auth.git",
-                "reference": "4cd6360fc7edbbff72c9199b4f4ce3548b659232"
+                "reference": "157a7095b0a4e12246923449e6083212438fc071"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/delight-im/PHP-Auth/zipball/4cd6360fc7edbbff72c9199b4f4ce3548b659232",
-                "reference": "4cd6360fc7edbbff72c9199b4f4ce3548b659232",
+                "url": "https://api.github.com/repos/delight-im/PHP-Auth/zipball/157a7095b0a4e12246923449e6083212438fc071",
+                "reference": "157a7095b0a4e12246923449e6083212438fc071",
                 "shasum": ""
             },
             "require": {
@@ -76,7 +76,7 @@
                 "login",
                 "security"
             ],
-            "time": "2018-08-28T21:51:30+00:00"
+            "time": "2020-05-06T20:36:45+00:00"
         },
         {
             "name": "delight-im/base64",
@@ -121,16 +121,16 @@
         },
         {
             "name": "delight-im/cookie",
-            "version": "v3.3.1",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/delight-im/PHP-Cookie.git",
-                "reference": "cad8b919f539d4446fe3385948a024b1924a87ce"
+                "reference": "67065d34272377d63bab0bd58f984f9b228c803f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/delight-im/PHP-Cookie/zipball/cad8b919f539d4446fe3385948a024b1924a87ce",
-                "reference": "cad8b919f539d4446fe3385948a024b1924a87ce",
+                "url": "https://api.github.com/repos/delight-im/PHP-Cookie/zipball/67065d34272377d63bab0bd58f984f9b228c803f",
+                "reference": "67065d34272377d63bab0bd58f984f9b228c803f",
                 "shasum": ""
             },
             "require": {
@@ -158,7 +158,7 @@
                 "samesite",
                 "xss"
             ],
-            "time": "2020-01-30T22:25:17+00:00"
+            "time": "2020-04-16T11:01:26+00:00"
         },
         {
             "name": "delight-im/db",
@@ -347,12 +347,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/r3sist/h3.git",
-                "reference": "103cd4972fa8a5f3151c6b31bcea0ed0d0d3d1eb"
+                "reference": "bdd09e966ad295e69e08ea8e48cf34881212e2bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/r3sist/h3/zipball/103cd4972fa8a5f3151c6b31bcea0ed0d0d3d1eb",
-                "reference": "103cd4972fa8a5f3151c6b31bcea0ed0d0d3d1eb",
+                "url": "https://api.github.com/repos/r3sist/h3/zipball/bdd09e966ad295e69e08ea8e48cf34881212e2bc",
+                "reference": "bdd09e966ad295e69e08ea8e48cf34881212e2bc",
                 "shasum": ""
             },
             "require": {
@@ -379,7 +379,7 @@
             ],
             "description": "Simple helper methods for Fatfree Framework powered apps",
             "homepage": "https://structure.hu",
-            "time": "2020-04-05T15:55:54+00:00"
+            "time": "2020-05-05T10:53:59+00:00"
         },
         {
             "name": "wixel/gump",
@@ -387,12 +387,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Wixel/GUMP.git",
-                "reference": "73a432fde80a4d205fa2f5ea00eb71500a265ed4"
+                "reference": "3e69c2f5f074fa4fa9052a9f57d0daa23353d8e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Wixel/GUMP/zipball/73a432fde80a4d205fa2f5ea00eb71500a265ed4",
-                "reference": "73a432fde80a4d205fa2f5ea00eb71500a265ed4",
+                "url": "https://api.github.com/repos/Wixel/GUMP/zipball/3e69c2f5f074fa4fa9052a9f57d0daa23353d8e8",
+                "reference": "3e69c2f5f074fa4fa9052a9f57d0daa23353d8e8",
                 "shasum": ""
             },
             "require": {
@@ -437,7 +437,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2020-03-18T09:44:43+00:00"
+            "time": "2020-04-28T10:43:54+00:00"
         }
     ],
     "packages-dev": [],
