@@ -23,7 +23,7 @@ class Auth3Controller
     }
 
     /** @used */
-    public function signupController(Base $f3): void
+    public function signupController(Base $f3): array
     {
         $_POST['codeconfirm'] = AUTH3_INVITECODE;
 
@@ -60,10 +60,10 @@ class Auth3Controller
         $f3->scrub($_POST['username']);
 
         if (AUTH3_EMAIL_REQUIRED === false) {
-            $this->auth3->signupWithoutEmail($_POST['password'], $_POST['username']);
-        } else {
-            $this->auth3->signup($_POST['email'], $_POST['password'], $_POST['username']);
+            return $this->auth3->signupWithoutEmail($_POST['password'], $_POST['username']);
         }
+
+        return $this->auth3->signup($_POST['email'], $_POST['password'], $_POST['username']);
     }
 
     /** @used */

@@ -118,7 +118,7 @@ class Auth3
         $this->logger->create('info', 'Auth3::sendVerificationEmail - Email sent', [$emailSubject, $emailTo]);
     }
 
-    public function signup(string $email, string $password, string $username): void
+    public function signup(string $email, string $password, string $username): array
     {
         $userId = 0;
         try {
@@ -164,9 +164,11 @@ class Auth3
             $this->logger->create('warning', 'Auth3::signup - Unknown user ID', [$userId]);
             $this->f3->reroute('@signup');
         }
+
+        return ['username' => $username, 'id' => $userId, 'email' => $email];
     }
 
-    public function signupWithoutEmail(string $password, string $username): void
+    public function signupWithoutEmail(string $password, string $username): array
     {
         $userId = 0;
         try {
@@ -210,6 +212,8 @@ class Auth3
             $this->logger->create('warning', 'Auth3::signupWithoutEmail - Duplicated username', [$username]);
             $this->f3->reroute('@signup');
         }
+
+        return ['username' => $username, 'id' => $userId];
     }
 
     public function loginWithUsername(string $username, string $password, ?int $duration): void
