@@ -176,15 +176,15 @@ class Auth3
             $this->f3->reroute('@signup');
         } catch (UnknownIdException $e) {
             $this->flash->addMessage('Unknown Id', 'danger');
-            $this->logger->create('warning', 'auth3 signup - Unknown Id', [$userId]);
+            $this->logger->create('warning', 'auth3 signup - Unknown Id', '');
             $this->f3->reroute('@signup');
         } catch (AuthError $e) {
             $this->flash->addMessage('Auth Error', 'danger');
-            $this->logger->create('warning', 'auth3 signup - Auth Error', [$userId]);
+            $this->logger->create('warning', 'auth3 signup - Auth Error', '');
             $this->f3->reroute('@signup');
         } catch (DuplicateUsernameException $e) {
             $this->flash->addMessage('Duplicated Username', 'danger');
-            $this->logger->create('warning', 'auth3 signup - Duplicated username', [$userId]);
+            $this->logger->create('warning', 'auth3 signup - Duplicated username', '');
             $this->f3->reroute('@signup');
         }
     }
