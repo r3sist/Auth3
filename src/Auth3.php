@@ -134,38 +134,33 @@ class Auth3
 
             $this->flash->addMessage(self::AUTH3L10N_SUCCESS_SIGNUP, 'success');
             $this->logger->create('success', 'Auth3::signup', [$email, $username]);
-            $this->f3->reroute('@login');
+
+            return ['username' => $username, 'id' => $userId, 'email' => $email];
+
         } catch (InvalidEmailException $e) {
             $this->flash->addMessage(self::AUTH3L10N_ERROR_INVALIDEMAIL, 'danger');
             $this->logger->create('warning', 'Auth3::signup - Invalid email', [$email]);
-            $this->f3->reroute('@signup');
         } catch (InvalidPasswordException $e) {
             $this->flash->addMessage(self::AUTH3L10N_ERROR_INVALIDPASSWORD, 'danger');
             $this->logger->create('warning', 'Auth3::ignup - Invalid password', [$password]);
-            $this->f3->reroute('@signup');
         } catch (UserAlreadyExistsException $e) {
             $this->flash->addMessage(self::AUTH3L10N_ERROR_INVALIDUSER, 'danger');
             $this->logger->create('warning', 'Auth3::signup - Duplicated user', [$email, $username]);
-            $this->f3->reroute('@signup');
         } catch (TooManyRequestsException $e) {
             $this->flash->addMessage(self::AUTH3L10N_ERROR_TOOMANYREQUEST, 'danger');
             $this->logger->create('warning', 'Auth3::signup - Too many request', [$email, $username]);
-            $this->f3->reroute('@signup');
         } catch (AuthError $e) {
             $this->flash->addMessage(self::AUTH3L10N_ERROR, 'danger');
             $this->logger->create('danger', 'Auth3::signup - Auth general error', [$email, $username]);
-            $this->f3->reroute('@signup');
         } catch (DuplicateUsernameException $e) {
             $this->flash->addMessage(self::AUTH3L10N_ERROR_DUPLICATEDUSERNAME, 'danger');
             $this->logger->create('warning', 'Auth3::signup - Duplicated username', [$username]);
-            $this->f3->reroute('@signup');
         } catch (UnknownIdException $e) {
             $this->flash->addMessage(self::AUTH3L10N_ERROR_UNKNOWNID, 'danger');
             $this->logger->create('warning', 'Auth3::signup - Unknown user ID', [$userId]);
-            $this->f3->reroute('@signup');
         }
 
-        return ['username' => $username, 'id' => $userId, 'email' => $email];
+        return [];
     }
 
     public function signupWithoutEmail(string $password, string $username): array

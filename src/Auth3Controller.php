@@ -9,26 +9,27 @@ use \resist\H3\Logger;
 
 class Auth3Controller
 {
+    private Base $f3;
     private Auth3 $auth3;
     private Flash $flash;
     private GUMP $gump;
     private Logger $logger;
 
-    public function __construct(Auth3 $auth3, Flash $flash, GUMP $gump, Logger $logger)
+    public function __construct(Base $f3, Auth3 $auth3, Flash $flash, GUMP $gump, Logger $logger)
     {
+        $this->f3 = $f3;
         $this->auth3 = $auth3;
         $this->flash = $flash;
         $this->gump = $gump;
         $this->logger = $logger;
     }
 
-    /** @used */
-    public function signupController(Base $f3): array
+    public function signupControlling(): array
     {
         $_POST['codeconfirm'] = AUTH3_INVITECODE;
 
         if (isset($_SESSION['captcha']) && AUTH3_CAPTCHA === true) {
-            $_POST['codeconfirm'] = (string)$_SESSION['captcha'].AUTH3_INVITECODE;
+            $_POST['codeconfirm'] = $_SESSION['captcha'] .AUTH3_INVITECODE;
         }
 
         $emailRule = 'required|valid_email';
@@ -54,16 +55,25 @@ class Auth3Controller
         if ($validPost === false) {
             $this->flash->addMessage($this->gump->get_readable_errors(true), 'danger');
             $this->logger->create('warning', 'auth3 signup - controller validation', [$this->gump->get_errors_array(), $_POST]);
-            $f3->reroute('@signup');
+            return [];
         }
 
-        $f3->scrub($_POST['username']);
+        $this->f3->scrub($_POST['username']);
 
         if (AUTH3_EMAIL_REQUIRED === false) {
             return $this->auth3->signupWithoutEmail($_POST['password'], $_POST['username']);
         }
 
         return $this->auth3->signup($_POST['email'], $_POST['password'], $_POST['username']);
+    }
+
+    /** @used */
+    public function signupController(Base $f3): void
+    {
+        if (empty($this->signupControlling())) {
+            $f3->reroute('@signup');
+        }
+        $f3->reroute('@login');
     }
 
     /** @used */
