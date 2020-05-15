@@ -67,9 +67,10 @@ class Auth3
 
         $uid = $this->auth->getUserId();
         $this->spreadData($uid);
+        $this->spreadRoutes();
     }
 
-    public function spreadRoutes(): void
+    private function spreadRoutes(): void
     {
         $this->f3->route('POST /login', '\resist\Auth3\Auth3Controller->loginController');
         $this->f3->route('POST /signup', '\resist\Auth3\Auth3Controller->signupController');
@@ -166,7 +167,8 @@ class Auth3
     {
         $userId = 0;
         try {
-            $userId = $this->auth->registerWithUniqueUsername(H3::gen(40).'@sorfi.org', $password, $username);
+            $email = H3::gen(40).'@sorfi.org';
+            $userId = $this->auth->registerWithUniqueUsername($email, $password, $username);
 
             $this->auth->admin()->addRoleForUserById($userId, Role::SUBSCRIBER);
 
@@ -176,7 +178,9 @@ class Auth3
 
             $this->flash->addMessage(self::AUTH3L10N_SUCCESS_SIGNUPALT, 'success');
             $this->logger->create('success', 'Auth3::signupWithoutEmail', [$username]);
-            $this->f3->reroute('@login');
+
+            return ['username' => $username, 'id' => $userId, 'email' => $email];
+
         } catch (InvalidEmailException $e) {
             $this->flash->addMessage(self::AUTH3L10N_ERROR_INVALIDEMAIL, 'danger');
             $this->logger->create('warning', 'Auth3::signupWithoutEmail - Invalid email', [$userId, $username]);
