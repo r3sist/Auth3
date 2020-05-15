@@ -59,6 +59,8 @@ Named routes are for redirects.
 
 ### Defined F3 controller methods and routes
 
+Call `$auth3->spreadRoutes();` in your app bootstrap file.
+
 #### POST signupController()
 
 Method: `POST` only

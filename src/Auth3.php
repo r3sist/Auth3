@@ -67,10 +67,9 @@ class Auth3
 
         $uid = $this->auth->getUserId();
         $this->spreadData($uid);
-        $this->spreadRoutes();
     }
 
-    private function spreadRoutes(): void
+    public function spreadRoutes(): void
     {
         $this->f3->route('POST /login', '\resist\Auth3\Auth3Controller->loginController');
         $this->f3->route('POST /signup', '\resist\Auth3\Auth3Controller->signupController');
