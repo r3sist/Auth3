@@ -75,7 +75,7 @@ class Auth3
         $this->f3->route('POST /login', '\resist\Auth3\Auth3Controller->loginController');
         $this->f3->route('POST /signup', '\resist\Auth3\Auth3Controller->signupController');
         $this->f3->route('GET @logout: /logout', '\resist\Auth3\Auth3Controller->logoutController');
-        $this->f3->route('GET @captcha: /captcha', '\resist\Auth3\Auth3Controller->renderCaptcha');
+        $this->f3->route('GET @captcha: /captcha', '\resist\Auth3\CaptchaController->renderCaptcha');
         $this->f3->route('GET /signup/verify/@selector/@token', '\resist\Auth3\Auth3Controller->verificationController');
     }
 
