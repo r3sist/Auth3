@@ -300,6 +300,6 @@ class Auth3
 
     public function touchUser(int $uid): void
     {
-        $this->db->exec('UPDATE '.AUTH3_USERDATATABLE.' SET last_login = ? WHERE uid = ? -- Auth3 touch', [time(), $uid]);
+        $this->db->exec('UPDATE auth3_users SET last_login = ? WHERE uid = ? -- Auth3 touch', [time(), $uid]);
     }
 }
