@@ -297,4 +297,9 @@ class Auth3
             $this->f3->reroute('@login');
         }
     }
+
+    public function touchUser(int $uid): void
+    {
+        $this->db->exec('UPDATE '.AUTH3_USERDATATABLE.' SET last_login = ? WHERE uid = ? -- Auth3 touch', [time(), $uid]);
+    }
 }
