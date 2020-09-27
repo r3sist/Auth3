@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "bcosca/fatfree-core",
-            "version": "3.7.1",
+            "version": "3.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bcosca/fatfree-core.git",
-                "reference": "64318caa00de4da0f558d2334dc70538bdbcd1ad"
+                "reference": "a0f7ecf456a2f1e099a9b6d7aedc22970be56030"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bcosca/fatfree-core/zipball/64318caa00de4da0f558d2334dc70538bdbcd1ad",
-                "reference": "64318caa00de4da0f558d2334dc70538bdbcd1ad",
+                "url": "https://api.github.com/repos/bcosca/fatfree-core/zipball/a0f7ecf456a2f1e099a9b6d7aedc22970be56030",
+                "reference": "a0f7ecf456a2f1e099a9b6d7aedc22970be56030",
                 "shasum": ""
             },
             "require": {
@@ -35,7 +35,7 @@
             ],
             "description": "A powerful yet easy-to-use PHP micro-framework designed to help you build dynamic and robust Web applications - fast!",
             "homepage": "http://fatfreeframework.com/",
-            "time": "2019-12-30T20:49:06+00:00"
+            "time": "2020-05-28T16:14:27+00:00"
         },
         {
             "name": "delight-im/auth",
@@ -386,7 +386,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Wixel/GUMP.git",
+                "url": "git@github.com:Wixel/GUMP.git",
                 "reference": "3e69c2f5f074fa4fa9052a9f57d0daa23353d8e8"
             },
             "dist": {
@@ -452,5 +452,6 @@
     "platform": {
         "php": ">=7.4"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
