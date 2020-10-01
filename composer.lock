@@ -39,16 +39,16 @@
         },
         {
             "name": "delight-im/auth",
-            "version": "v8.2.1",
+            "version": "v8.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/delight-im/PHP-Auth.git",
-                "reference": "157a7095b0a4e12246923449e6083212438fc071"
+                "reference": "729c76668fa638769ab834c904d50696686797e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/delight-im/PHP-Auth/zipball/157a7095b0a4e12246923449e6083212438fc071",
-                "reference": "157a7095b0a4e12246923449e6083212438fc071",
+                "url": "https://api.github.com/repos/delight-im/PHP-Auth/zipball/729c76668fa638769ab834c904d50696686797e9",
+                "reference": "729c76668fa638769ab834c904d50696686797e9",
                 "shasum": ""
             },
             "require": {
@@ -76,7 +76,7 @@
                 "login",
                 "security"
             ],
-            "time": "2020-05-06T20:36:45+00:00"
+            "time": "2020-09-30T18:40:54+00:00"
         },
         {
             "name": "delight-im/base64",
@@ -386,7 +386,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Wixel/GUMP.git",
+                "url": "git@github.com:Wixel/GUMP.git",
                 "reference": "3e69c2f5f074fa4fa9052a9f57d0daa23353d8e8"
             },
             "dist": {
@@ -452,5 +452,6 @@
     "platform": {
         "php": ">=7.4"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
