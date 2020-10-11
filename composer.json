@@ -15,7 +15,7 @@
         "bcosca/fatfree-core": "3.*",
         "delight-im/auth": "^8.1",
         "ikkez/f3-flash": "1.*",
-        "wixel/gump": "dev-master",
+        "wixel/gump": "^1.12",
         "resist/h3": "dev-master"
     },
     "autoload": {
