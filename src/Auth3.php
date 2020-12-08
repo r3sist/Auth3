@@ -256,7 +256,7 @@ class Auth3
             $this->auth->logOutEverywhere();
             $this->auth->destroySession();
         } catch (\Throwable $e) {
-
+            $this->flash->addMessage($e->getMessage(), 'danger');
         }
 
         $this->flash->addMessage(self::AUTH3L10N_SUCCESS_LOGOUT, 'success');

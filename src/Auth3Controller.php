@@ -98,8 +98,11 @@ class Auth3Controller
 
         $duration = null;
         if (isset($_POST['remember']) && $_POST['remember'] === '1') {
-            $duration = (int) (60*60*24*30);
+            $duration = 60*60*24*30;
         }
+
+        setcookie( session_name(), '', time()-3600, '/');
+
         $this->auth3->loginWithUsername($_POST['username'], $_POST['password'], $duration);
     }
 
